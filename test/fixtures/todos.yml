@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  user: one
+  complete_time: 2021-01-05 15:45:15
+  tags: MyText
+  completed: false
+  due_time: 2021-01-05 15:45:15
+
+two:
+  title: MyString
+  description: MyText
+  user: two
+  complete_time: 2021-01-05 15:45:15
+  tags: MyText
+  completed: false
+  due_time: 2021-01-05 15:45:15
