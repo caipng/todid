@@ -3,8 +3,12 @@ class Auth::UsersController < ApplicationController
    
     # GET /auth/me
     def show
-        @user = User.find_by_email(params[:email])
-        render json: @user, status: :ok
+        if params[:email].nil? || params[:email].empty?
+            render json: { error: 'Email cannot be blank' }, status: :unprocessable_entity
+        else
+            @user = User.find_by_email(params[:email])
+            render json: @user, status: :ok
+        end
     rescue ActiveRecord::RecordNotFound
         render json: { error: 'User does not exist' }, status: :not_found
     end
@@ -25,7 +29,7 @@ class Auth::UsersController < ApplicationController
         if @user&.authenticate(params[:password])
             token = JsonWebToken.encode(user_id: @user.id)
             time = Time.now + 24.hours.to_i
-            render json: { token: token, exp: time.strftime('%m-%d-%Y %H:%M') }, status: :ok
+            render json: @user.attributes.merge({ token: token, exp: time.strftime('%m-%d-%Y %H:%M') }), status: :ok
         else
             render json: { error: 'invalid login' }, status: :unauthorized
         end
