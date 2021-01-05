@@ -3,14 +3,7 @@ class Auth::UsersController < ApplicationController
    
     # GET /auth/me
     def show
-        if params[:email].nil? || params[:email].empty?
-            render json: { error: 'Email cannot be blank' }, status: :unprocessable_entity
-        else
-            @user = User.find_by_email(params[:email])
-            render json: @user, status: :ok
-        end
-    rescue ActiveRecord::RecordNotFound
-        render json: { error: 'User does not exist' }, status: :not_found
+        render json: @user, status: :ok
     end
 
     # POST /auth/signup
