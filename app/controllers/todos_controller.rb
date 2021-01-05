@@ -6,4 +6,9 @@
 #         DELETE /todos/:id(.:format)                                                                              todos#destroy
 
 class TodosController < ApplicationController
+    # GET /todos
+    def index
+      @todos = @user.todos
+      render json: @todos, status: :ok
+    end
 end
