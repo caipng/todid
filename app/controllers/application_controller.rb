@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
     before_action :authorize_request
+    wrap_parameters false
 
     def authorize_request
         # { Authorization: 'Bearer <token>' }
